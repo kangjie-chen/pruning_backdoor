@@ -2,7 +2,18 @@ import torch
 import torch.nn as nn
 import torchvision
 import torchvision.transforms as transforms
+import logging
+import time
 
+current_time = time.strftime("%H:%M:%S_%Y-%m-%d", time.localtime(time.time()))
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(filename)s:%(lineno)d - %(message)s',
+    handlers=[
+        logging.FileHandler(f"./logs/clean_train_{current_time}.log", mode="a"), 
+        logging.StreamHandler()
+    ]
+) 
 
 # Device configuration
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
